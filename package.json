@@ -1,0 +1,31 @@
+{
+  "name": "zelos",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --config webpack.config.js",
+    "dev": "webpack --config webpack.config.js --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@injectivelabs/networks": "^1.19.19",
+    "@injectivelabs/sdk-ts": "^1.19.19",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "browserify-zlib": "^0.2.0",
+    "buffer": "^6.0.3",
+    "crypto-browserify": "^3.12.1",
+    "https-browserify": "^1.0.0",
+    "os-browserify": "^0.3.0",
+    "path-browserify": "^1.0.1",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
+    "vm-browserify": "^1.1.2",
+    "webpack": "^5.107.2",
+    "webpack-cli": "^7.0.2"
+  }
+}
