@@ -238,16 +238,79 @@ footer a {
   text-decoration: none;
 }
 
-@media (max-width: 480px) {
-  .input-section {
-    padding: 20px;
+@media (max-width: 768px) {
+  body {
+    padding: 16px;
+    align-items: flex-start;
+  }
+
+  .container {
+    max-width: 100%;
+  }
+
+  header {
+    margin-bottom: 32px;
   }
 
   .logo {
     font-size: 1.8rem;
   }
 
+  .tagline {
+    font-size: 0.9rem;
+  }
+
+  .input-section {
+    padding: 20px;
+    border-radius: 12px;
+  }
+
+  .input-section input {
+    font-size: 0.85rem;
+    padding: 12px 14px;
+  }
+
+  button {
+    padding: 14px;
+    font-size: 0.95rem;
+  }
+
   .results {
     padding: 20px;
+    border-radius: 12px;
+  }
+
+  .results-inner h2 {
+    font-size: 1rem;
+  }
+
+  .results-inner br {
+    line-height: 1.6;
+  }
+
+  .share-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 14px;
+    font-size: 0.9rem;
+  }
+
+  footer {
+    margin-top: 28px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .logo {
+    font-size: 1.5rem;
+  }
+
+  .input-section {
+    padding: 16px;
+  }
+
+  .results {
+    padding: 16px;
   }
 }
