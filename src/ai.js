@@ -7,6 +7,11 @@ export async function analyzeWallet(walletData, address) {
     });
 
     const data = await response.json();
+
+    if (!data.result) {
+      return "Error: " + (data.error || "No result returned from AI");
+    }
+
     return data.result;
   } catch (error) {
     console.error("AI analysis error:", error);

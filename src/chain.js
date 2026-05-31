@@ -8,7 +8,7 @@ const network = Network.Mainnet;
 const endpoints = getNetworkEndpoints(network);
 
 const portfolioApi = new IndexerGrpcAccountPortfolioApi(endpoints.indexer);
-const explorerApi = new IndexerGrpcExplorerApi(endpoints.indexer);
+const explorerApi = new IndexerGrpcExplorerApi(endpoints.explorer); // ← fixed
 
 export async function fetchPortfolio(address) {
   try {
@@ -22,8 +22,9 @@ export async function fetchPortfolio(address) {
 
 export async function fetchTransactions(address) {
   try {
-    const transactions = await explorerApi.fetchAccountTransactions({
-      address,
+    const transactions = await explorerApi.fetchAccountTx({
+      // ← fixed
+      injectiveAddress: address, // ← fixed
       limit: 10,
     });
     return transactions;

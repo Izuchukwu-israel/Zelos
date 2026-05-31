@@ -67,6 +67,11 @@
           const walletData = await window.fetchAll(address);
           showStatus("🤖 Zelos is analyzing your wallet...", "loading");
           const analysis = await window.analyzeWallet(walletData, address);
+          if (!analysis || analysis.startsWith("Error")) {
+            showStatus("❌ " + (analysis || "Analysis failed"), "error");
+            btn.disabled = false;
+            return;
+          }
           showResult(analysis);
         } catch (err) {
           showStatus("❌ Error: " + err.message, "error");
@@ -86,7 +91,39 @@
       function showResult(text) {
         status.style.display = "none";
         results.style.display = "block";
-        resultsContent.innerHTML = formatMarkdown(text);
+
+        // Extract tweet section before rendering
+        let tweetText = "";
+        let displayText = text;
+        const tweetMatch = text.match(/## 🐦 Tweet\n?([\s\S]*?)$/);
+        if (tweetMatch) {
+          tweetText = tweetMatch[1].trim();
+          displayText = text.replace(/## 🐦 Tweet[\s\S]*$/, "");
+        }
+
+        // Format and split into sections for animation
+        const html = formatMarkdown(displayText);
+        const sections = html.split("<h2>");
+        let finalHtml = sections[0];
+        sections.slice(1).forEach((section, i) => {
+          finalHtml += `<div class="section-reveal" style="animation-delay:${i * 0.18}s"><h2>${section}</div>`;
+        });
+
+        resultsContent.innerHTML = finalHtml;
+
+        // Add share button if tweet was generated
+        if (tweetText) {
+          const shareBtn = document.createElement("button");
+          shareBtn.className = "share-btn";
+          shareBtn.innerHTML = "𝕏 &nbsp;Share Your Results";
+          shareBtn.onclick = () => {
+            window.open(
+              `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`,
+              "_blank",
+            );
+          };
+          resultsContent.appendChild(shareBtn);
+        }
       }
 
       function formatMarkdown(text) {
@@ -96,7 +133,7 @@
           .replace(/\*(.*?)\*/g, "<em>$1</em>")
           .replace(/\n/g, "<br/>")
           .replace(
-            /(https?:\/\/[^\s<]+)/g,
+            /(https?:\/\/[^\s<"]+)/g,
             '<a href="$1" target="_blank">$1</a>',
           );
       }

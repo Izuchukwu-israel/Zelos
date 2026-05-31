@@ -183,6 +183,49 @@ button:disabled {
   line-height: 2;
 }
 
+/* Section reveal animation */
+.section-reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: revealUp 0.5s ease forwards;
+}
+
+@keyframes revealUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Share on X button */
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  margin-top: 32px;
+  padding: 13px 28px;
+  background: #000;
+  color: #fff;
+  border: 1px solid #333;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    transform 0.1s;
+}
+
+.share-btn:hover {
+  background: #111;
+  border-color: #555;
+  transform: translateY(-1px);
+  opacity: 1;
+}
+
 footer {
   text-align: center;
   margin-top: 40px;
